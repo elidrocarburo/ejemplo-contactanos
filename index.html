@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contáctanos</title>
+  <meta name="description" content="Página de ejemplo para practicar validación de formularios con Jquery.">
+  <link rel="stylesheet" href="estilos.css">
+  <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+</head>
+<body>
+  <div class="contenedor_principal ancho margen">
+    <div class="contenedor_titulo ancho margen">
+      <h2>Contáctanos</h2>
+
+      <h1>¿Necesitas ayuda <br> para hacer crecer tu <br> negocio?</h1>
+
+      <p>Solicita más información y juntos idearemos la estrategia <br> perfecta para cumplir tus metas.</p>
+    </div>
+
+    <form class="ancho margen contenedor_formulario" action="guardar.php" method="get" enctype="text/plain" id="formulario">
+      <div class="contenedor_campos">
+        <input type="text" name="nombre" id="nombre" class="campos" placeholder="Nombre*">
+        <input type="text" name="apellido" id="apellido" class="campos" placeholder="Apellidos*">
+
+        <br>
+        <input type="email" name="correo" id="correo" class="campos" placeholder="Correo electrónico*">
+        <input type="tel" name="telefono" id="telefono" class="campos" placeholder="Número de teléfono móvil*">
+
+        <br>
+        <select name="presupuesto" id="campos_presupuesto" class="campos2">
+          <option value="">Selecciona tu presupuesto</option>
+          <option value="pres1">De $18,000 - $25,000</option>
+          <option value="pres2">De $25,000 - $45,000</option>
+          <option value="pres3">De $45,000 - $100,000</option>
+        </select>
+
+        <br>
+        <input type="text" name="nombreempresa" id="nombreempresa" class="campos2" placeholder="Nombre de la empresa">
+
+        <br>
+        <select name="industria" id="campos_industria" class="campos2">
+          <option value="">Selecciona una industria de tu empresa*</option>
+          <option value="inmobi">Inmobiliaria</option>
+          <option value="educ">Educación</option>
+          <option value="turis">Turismo</option>
+          <option value="renovable">Energías renovables</option>
+          <option value="serpro">Servicios profesionales</option>
+          <option value="start">Startup</option>
+          <option value="ecomer">Ecommerce</option>
+          <option value="finan">Financiera</option>
+          <option value="salud">Salud</option>
+          <option value="agendigi">Agencia digital</option>
+          <option value="otra">Otra</option>
+        </select>
+
+        <br>
+        <input type="text" name="sitioweb" id="sitioweb" class="campos2" placeholder="Sitio Web">
+
+        <br>
+        <button type="button" class="btn_azul" id="validar_boton">Enviar</button>
+      </div>
+    </form>
+
+    <!-- funciones para validar -->
+     <script>
+      $("#validar_boton").click(function(){
+
+        //validar nombre
+        if ($("#nombre").val().trim() == '') {
+          alert("Escribe tu nombre ");
+          $("#nombre").focus();
+        return false;
+        }
+
+        //validar apellido
+        if ($("#apellido").val().trim() == '') {
+          alert("Escribe tu apellido ");
+          $("#apellido").focus();
+        return false;
+        }
+
+        //validar correo
+        if ($("#correo").val().trim() == '') {
+          alert("Escribe tu correo ");
+          $("#correo").focus();
+        return false;
+        }
+
+        //validar formato de correo
+        let expresionCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!expresionCorreo.test($("#correo").val().trim())) {
+        alert("Escribe un email válido");
+        $("#correo").focus();
+        return false;
+        }
+
+        //validar teléfono
+        if ($("#telefono").val().trim() == '') {
+          alert("Escribe tu teléfono ");
+          $("#telefono").focus();
+        return false;
+        }
+
+        //validar formato de correo
+        //esto lo busqué de w3resources, esta expresión regular se va a encargar de sólo recibir 10 dígitos (de ahí el d de dígito y los corchetes la cantidad que sólo va a recibir)
+        let expresionTelefono = /^\d{10}$/;
+        if (!expresionTelefono.test($("#telefono").val().trim())) {
+        alert("Escribe un número de teléfono válido");
+        $("#telefono").focus();
+        return false;
+        }
+
+        //validar opciones
+        if($("#campos_industria").val() == '') {
+          alert("Debes seleccionar una opción de industria");
+          $("#unidades").focus();
+        return false;
+        }
+
+        //mandar información
+        $("#formulario").submit();
+      }
+    )
+     </script>
+  </div>
+</body>
+</html>
